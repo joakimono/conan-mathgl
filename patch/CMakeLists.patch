@@ -2,13 +2,13 @@
 +++ CMakeLists.txt	2020-08-01 10:55:31.435561859 +0200
 @@ -1,6 +1,19 @@
  cmake_minimum_required(VERSION 3.1.0)
- 
+
 -project( MathGL2 )
 +project( MathGL2 C CXX )
 +include(${CMAKE_BINARY_DIR}/../conan_paths.cmake)
 +find_package(ZLIB REQUIRED)
 +find_package(libjpeg-turbo REQUIRED)
-+find_package(Libharu REQUIRED)
++find_package(libharu REQUIRED)
 +find_package(PNG REQUIRED)
 +
 +set(CMAKE_CXX_STANDARD 11)
@@ -18,13 +18,13 @@
 +else()
 +    set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
 +endif()
- 
+
  set(mgl_clean_files )
  set(MGL_DEP_LIBS)
 @@ -14,7 +27,7 @@
  		None(CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
  endif(NOT CMAKE_BUILD_TYPE)
- 
+
 -set(CMAKE_VERBOSE_MAKEFILE ON)
 +set(CMAKE_VERBOSE_MAKEFILE OFF)
  set(MathGL_VERSION_MAJOR 2)
@@ -44,9 +44,9 @@
 -	endif(NOT HPDF_INCLUDE_DIR)
 -	include_directories(${HPDF_INCLUDE_DIR})
 -	set(MGL_DEP_LIBS ${HPDF_LIB} ${MGL_DEP_LIBS})
-+        find_package(Libharu REQUIRED)
++        find_package(libharu REQUIRED)
 +
-+        set(MGL_DEP_LIBS Libharu::Libharu ${MGL_DEP_LIBS})
++        set(MGL_DEP_LIBS libharu::libharu ${MGL_DEP_LIBS})
  else(enable-pdf)
  	set(MGL_HAVE_PDF 0)
  endif(enable-pdf)

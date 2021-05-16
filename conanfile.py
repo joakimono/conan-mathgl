@@ -101,12 +101,12 @@ class MathglConan(ConanFile):
             self.add_cmake_opt("gsl", self.options.gsl)
             self.add_cmake_opt("hdf5", self.options.hdf5)
             self.add_cmake_opt("all-swig", self.options.all_swig)
-        
+
         # TODO add dependencies using conan packages
         # expected to be found w/o conan: glut, fltk, ltdl, gsl, mpi
 
         if self.settings.os != "Windows" and self.options.opengl:
-            self.requires("opengl/virtual@bincrafters/stable")
+            self.requires("opengl/system")
 
         if self.options.zlib:
             self.requires("zlib/[>=1.2.11]")
@@ -119,17 +119,21 @@ class MathglConan(ConanFile):
         if self.options.gif:
             self.requires("giflib/[>=5.1.4]@bincrafters/stable")
         if self.options.pdf:
-            self.requires("libharu/[>=2.3.0]@sintef/stable",
+            self.requires("libharu/[>=2.3.0]",
                           private=self.options.shared)
             self.options["libharu"].shared = False
         if self.options.hdf5:
             if not self.options.lgpl:
-                self.requires("hdf5/[>=1.8.21]@sintef/stable")
+                self.requires("hdf5/[>=1.8.21]")
 
         if self.options.wxWidgets:
             self.requires("wxwidgets/[>=3.1.0]@bincrafters/stable")
         if self.options.qt5:
-            self.requires("qt/[>=5.10.0]@bincrafters/stable")
+            if self.settings.compiler == "gcc" \
+               and self.settings.compiler.version == "6":
+                self.requires("qt/5.12.8@bincrafters/stable")
+            else:
+                self.requires("qt/5.15.2@bincrafters/stable")
 
     def configure(self):
         if self.settings.compiler == "Visual Studio":
@@ -210,4 +214,3 @@ class MathglConan(ConanFile):
                 for lib in range(len(self.cpp_info.libs)):
                     self.cpp_info.libs[lib] += "-static"
             self.cpp_info.defines = ["MGL_STATIC_DEFINE","_CRT_STDIO_ISO_WIDE_SPECIFIERS"]
-

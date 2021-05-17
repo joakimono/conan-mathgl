@@ -39,6 +39,7 @@ jobs:
         run: |
           conan remote add sintef ${env:CONAN_UPLOAD} --insert 0
           conan remote add bincrafters https://bincrafters.jfrog.io/artifactory/api/conan/public-conan --insert 0
+          conan config set general.revisions_enabled=1
       - name: Conan create
         run: |
           conan create -s build_type=${{ matrix.build_type }} `

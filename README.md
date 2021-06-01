@@ -12,7 +12,7 @@ The package is usually consumed using the `conan install` command or a *conanfil
 1. Add remote to conan's package [remotes](https://docs.conan.io/en/latest/reference/commands/misc/remote.html?highlight=remotes):
 
    ```bash
-   $ conan remote add sintef https://artifactory.smd.sintef.no/artifactory/api/conan/public-conan
+   $ conan remote add sintef https://artifactory.smd.sintef.no/artifactory/api/conan/conan-local
    $ conan remote add bincrafters https://bincrafters.jfrog.io/artifactory/api/conan/public-conan
    $ conan config set general.revisions_enabled=1
    ```

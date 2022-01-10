@@ -22,12 +22,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler_toolset: [v141, v142]
+        compiler_toolset: [v141, v142, v143]
         build_type: [Debug, Release]
         option_shared: [shared=True, shared=False]
         option_qt5: [qt5=False]
-        compiler_version: [16]
-        os: [windows-2019]
+        compiler_version: [17]
+        os: [windows-2022]
     steps:
       - uses: actions/checkout@v2
       - name: Install prerequisites
@@ -45,6 +45,7 @@ jobs:
           conan create -s build_type=${{ matrix.build_type }} `
             -s compiler.version=${{ matrix.compiler_version }} `
             -s compiler.toolset=${{ matrix.compiler_toolset }} `
+            -s compiler="Visual Studio" `
             -s compiler.cppstd=14 `
             -o ${env:SINTEF_LIBNAME}:${{ matrix.option_shared }} `
             -o ${env:SINTEF_LIBNAME}:${{ matrix.option_qt5 }} `

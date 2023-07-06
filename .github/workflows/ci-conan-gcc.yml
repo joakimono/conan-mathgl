@@ -58,7 +58,7 @@ jobs:
             -s compiler.version=${{ matrix.compiler_version }} \
             -s compiler.cppstd=${{ env.cppstd }} \
             -pr:b=${{ matrix.profile }} -pr:h=${{ matrix.profile }} \
-            - o ${{ env.package_name }}/*:shared=${{ matrix.shared }} \
+            -o ${{ env.package_name }}/*:shared=${{ matrix.shared }} \
             -b missing -b outdated -b ${{ env.package_name }}* \
             . ${{ env.PKG_REFERENCE }}
       - name: Conan upload

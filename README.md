@@ -14,7 +14,7 @@
    Add *conanfile.txt*:
    ```
    [requires]
-   clapack/3.2.1@sintef/stable
+   mathgl/2.4.4@sintef/stable
 
    [tool_requires]
    cmake/[>=3.25.0]
